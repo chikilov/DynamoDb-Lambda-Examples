@@ -11,9 +11,9 @@ exports.handler = function(event, context) {
          "Key":
             {"User Id"   : {"S":event.objectId}
         },
-       "AttributesToGet"   : ["First Name","Last Name", "Latitude", "Longitude"],
-      //   "ProjectionExpression":  ["First Name","Last Name", "Latitude", "Longitude"],
-        "ConsistentRead"    : true
+       "ProjectionExpression": "#S1, #n2, #n3, #n4",
+       "ExpressionAttributeNames" : {"#S1": "First Name", "#n2": "Last Name", "#n3": "Longitude", "#n4": "Latitude"},
+       "ConsistentRead"    : true
   }
   
    dynamodb.getItem(params, function(err, data)
