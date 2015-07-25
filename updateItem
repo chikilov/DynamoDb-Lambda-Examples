@@ -6,11 +6,14 @@ exports.handler = function(event, context) {
     dynamodb.listTables(function(err, data) {
     });
     var tableName = "User";
+    var datetime = new Date().getTime().toString();
     dynamodb.updateItem({
         "TableName": tableName,
         "Key" : {
             "User Id": {"S": event.objectId }},
               "AttributeUpdates"  : {  "Longitude"  : {"Value":{"N":event.longitude},
+                                     "Action": "PUT"},
+                                     "Latitude"  : {"Value":{"N":event.latitude},
                                      "Action": "PUT"},
                                                },
                    
