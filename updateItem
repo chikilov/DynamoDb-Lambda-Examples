@@ -5,20 +5,22 @@ var dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 exports.handler = function(event, context) {
     dynamodb.listTables(function(err, data) {
     });
-    var tableName = "User";
     var datetime = new Date().getTime().toString();
-    dynamodb.updateItem({
-        "TableName": tableName,
+  
+     var params = {
+        "TableName": "User",
         "Key" : {
-            "User Id": {"S": event.objectId }},
-              "AttributeUpdates"  : {  "Longitude"  : {"Value":{"N":event.longitude},
+        "User Id": {"S": event.objectId }},
+        "AttributeUpdates"  : {  "Longitude"  : {"Value":{"N":event.longitude},
                                      "Action": "PUT"},
                                      "Latitude"  : {"Value":{"N":event.latitude},
                                      "Action": "PUT"},
-                                               },
-                   
-        
-    }, function(err, data) {
+                                      "Date Updated"  : {"Value":{"N":datetime},
+                                     "Action": "PUT"},
+                                               }
+     }
+     
+     dynamodb.updateItem(params, function(err, data) {
         if (err) {
             context.fail('error','Error updating item: '+err);
             console.log(err);
