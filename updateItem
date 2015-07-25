@@ -20,12 +20,12 @@ exports.handler = function(event, context) {
         
     }, function(err, data) {
         if (err) {
-            context.fail('error','putting item into dynamodb failed: '+err);
+            context.fail('error','Error updating item: '+err);
             console.log(err);
         }
         else {
           //  console.log('great success: '+JSON.stringify(data, null, '  '));
-            context.succeed('K THX BY');
+            context.succeed('Update Success');
         }
     });
 };
