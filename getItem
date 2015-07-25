@@ -11,8 +11,8 @@ exports.handler = function(event, context) {
          "Key":
             {"User Id"   : {"S":event.objectId}
         },
-       "ProjectionExpression": "#S1, #n2, #n3, #n4",
-       "ExpressionAttributeNames" : {"#S1": "First Name", "#n2": "Last Name", "#n3": "Longitude", "#n4": "Latitude"},
+       "ProjectionExpression": "#firstName, #lastName, #longitude, #latitude",
+       "ExpressionAttributeNames" : {"#firstName": "First Name", "#lastName": "Last Name", "#longitude": "Longitude", "#latitude": "Latitude"},
        "ConsistentRead"    : true
   }
   
